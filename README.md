@@ -29,11 +29,11 @@ Verifica dell'installazione del web server, come da manuale symfony, occhio ai f
 
 nel tutorial il virtual host del web server è configurato con il nome
 
-[http://rabbitmq-tutorial.localhost/] (http://rabbitmq-tutorial.localhost/)
+[http://rabbitmq-tutorial.localhost/](http://rabbitmq-tutorial.localhost/)
 
 La console è raggiungibile all'url:
 
-[http://localhost:15672/#/] (http://localhost:15672/#/)
+[http://localhost:15672/#/](http://localhost:15672/#/)
 
 
 2) Branch queue
