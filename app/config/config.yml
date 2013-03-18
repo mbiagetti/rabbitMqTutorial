@@ -58,3 +58,36 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+
+old_sound_rabbit_mq:
+    enable_collector: true
+    connections:
+        default:
+            host:      'localhost'
+            port:      5672
+            user:      'guest'
+            password:  'guest'
+            vhost:     '/'
+
+    producers:
+        custom_message:
+            connection: default
+            exchange_options: {name: 'custom-message', type: direct}
+    consumers:
+        custom_message:
+            connection: default
+            exchange_options: {name: 'custom-message', type: direct}
+            queue_options:    {name: 'custom-message'}
+            callback:         custom_message_service
+            
+        another_custom_message:
+            connection: default
+            exchange_options: {name: 'custom-message', type: direct}
+            queue_options:    {name: 'another-custom-message'}
+            callback:         custom_message_service
+
+
+services:
+    custom_message_service:
+        class: Dnsee\TutorialBundle\Consumer\CustomMessageConsumer
