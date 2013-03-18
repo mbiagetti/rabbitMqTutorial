@@ -71,23 +71,39 @@ old_sound_rabbit_mq:
             vhost:     '/'
 
     producers:
-        custom_message:
+        rk_custom_message:
             connection: default
-            exchange_options: {name: 'custom-message', type: direct}
+            exchange_options: {name: 'routing-key-custom-message', type: direct}
     consumers:
-        custom_message:
+        rk_custom_message:
             connection: default
-            exchange_options: {name: 'custom-message', type: direct}
+            exchange_options: {name: 'routing-key-custom-message', type: direct}
             queue_options:    {name: 'custom-message'}
-            callback:         custom_message_service
+            callback:         generic_custom_message_service
             
-        another_custom_message:
+        rk_mail_custom_message:
+            queue_options:
+                name: 'routing-key-custom-message-mail'
+                routing_keys:
+                  - 'delivery.mail'
+                  - 'delivery.email'
             connection: default
-            exchange_options: {name: 'custom-message', type: direct}
-            queue_options:    {name: 'another-custom-message'}
-            callback:         custom_message_service
+            exchange_options: {name: 'routing-key-custom-message', type: direct}
+            callback:         rk_mail_custom_message_service
+        rk_sms_custom_message:
+            queue_options:
+                name: 'routing-key-custom-message-sms'
+                routing_keys:
+                  - 'delivery.sms'
+            connection: default
+            exchange_options: {name: 'routing-key-custom-message', type: direct}
+            callback:         rk_sms_custom_message_service
 
 
 services:
-    custom_message_service:
-        class: Dnsee\TutorialBundle\Consumer\CustomMessageConsumer
+    generic_custom_message_service:
+        class: Dnsee\TutorialBundle\Consumer\GenericCustomMessageConsumer
+    rk_sms_custom_message_service:
+        class: Dnsee\TutorialBundle\Consumer\SMSCustomMessageConsumer
+    rk_mail_custom_message_service:
+        class: Dnsee\TutorialBundle\Consumer\MailCustomMessageConsumer

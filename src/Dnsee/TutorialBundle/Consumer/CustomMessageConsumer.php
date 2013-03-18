@@ -6,14 +6,14 @@ use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 
 
-class CustomMessageConsumer implements ConsumerInterface
+abstract class CustomMessageConsumer implements ConsumerInterface
 {
     protected $i;
 
     public function execute(AMQPMessage $msg)
     {
         $this->i++;
-        echo '['.$this->i.']Incoming new message'.PHP_EOL;
+        echo '['.$this->i.']['.$this->getName().']Incoming new message'.PHP_EOL;
 
         $message = unserialize($msg->body);
 
@@ -32,5 +32,8 @@ class CustomMessageConsumer implements ConsumerInterface
 
 
         }
+
+    protected abstract function getName();
+
     }
 

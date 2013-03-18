@@ -9,33 +9,27 @@
 
     <h1>Welcome!</h1>
 
-    <p>Queue example</p>
+    <p>Queue with routing key example</p>
 
     <div class="block-community">
         <ul>start RabbitMQ server</ul>
         <ul><i>>sudo service rabbitmq-server start</i></ul>
         <ul><br></ul>
-        <ul><b>1. un producer, un consumer <a href="http://www.rabbitmq.com/tutorials/tutorial-one-java.html" target="_blank">scenario 1</a></b></ul>
-        <ul><a href="http://www.rabbitmq.com/tutorials/tutorial-one-java.html" target="_blank"><img width="180" src="http://www.rabbitmq.com//img/tutorials/python-one.png"></a></ul>
-        <ul>attiva consumer da shell</ul>
-        <ul><i>>php app/console rabbitmq:consumer custom_message</i></ul>
-        <ul>attiva il producer</ul>
-        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/produce/ciao/mondo" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/produce/ciao/mondo</a></ul>
-        <ul><br></ul>
-        <ul><b>1. un producer, due consumer <a href="http://www.rabbitmq.com/tutorials/tutorial-two-java.html" target="_blank">scenario 2</a></b></ul>
-        <ul><a href="http://www.rabbitmq.com/tutorials/tutorial-two-java.html" target="_blank"><img width="180" src="http://www.rabbitmq.com//img/tutorials/python-two.png"></a></ul>
-        <ul>attiva altro consumer con un'altra shell</ul>
-        <ul><i>>php app/console rabbitmq:consumer custom_message</i></ul>
-        <ul>attiva il producer per inviare due messaggi</ul>
-        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/produce/ciao/mondo/2" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/produce/ciao/mondo/2</a></ul>
-        <ul><br></ul>
-        <ul><b>3. Publish/Subscribe <a href="http://www.rabbitmq.com/tutorials/tutorial-three-java.html" target="_blank">scenario 3</a></b></ul>
-        <ul><a href="http://www.rabbitmq.com/tutorials/tutorial-three-java.html" target="_blank"><img width="180" src="http://www.rabbitmq.com//img/tutorials/python-three.png"></a></ul>
-        <ul>attiviamo due distinti consumer via shell</ul>
-        <ul><i>>php app/console rabbitmq:consumer custom_message</i></ul>
-        <ul><i>>php app/console rabbitmq:consumer another_custom_message</i></ul>
-        <ul>attiva il producer per inviare un solo messaggio</ul>
-        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/produce/ciao/mondo" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/produce/ciao/mondo</a></ul>
+        <ul><b>1. un producer con  consumer selettivi <a href="http://www.rabbitmq.com/tutorials/tutorial-four-java.html" target="_blank">scenario 4</a></b></ul>
+        <ul><a href="http://www.rabbitmq.com/tutorials/tutorial-four-java.html" target="_blank"><img width="180" src="http://www.rabbitmq.com//img/tutorials/python-four.png"></a></ul>
+        <ul>attiva consumer per messaggi di tipo sms da shell</ul>
+        <ul><i>>php app/console rabbitmq:consumer rk_sms_custom_message</i></ul>
+        <ul>attiva consumer per messaggi di tipo mail da shell</ul>
+        <ul><i>>php app/console rabbitmq:consumer rk_mail_custom_message</i></ul>
+        <ul>attiva il producer con routing key mail</ul>
+        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/rouningKey/ciao/mondo/delivery.mail" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/rouningKey/ciao/mondo/delivery.mail</a></ul>
+        <ul>attiva il producer con routing key mail</ul>
+        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/rouningKey/ciao/mondo/delivery.sms" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/rouningKey/ciao/mondo/delivery.sms</a></ul>
+        <ul>puoi specificare il routing key come parametro al consumer da command line</ul>
+        <ul><i>>php app/console rabbitmq:consumer --route "delivery.sms" rk_custom_message</i></ul>
+
+
+
 
 
     </div>

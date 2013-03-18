@@ -1,0 +1,11 @@
+{% extends 'DnseeTutorialBundle::layout.html.twig' %}
+
+{% block title "Send object in queue with routing key"  %}
+
+{% block content %}
+    Produced <b>{{tot}}</b> message object <b>{{ msg.subject}} {{ msg.body}}</b> with routing key: <b>{{ key }}</b>
+    <br>
+    (notare il data collector nella web toolbar)
+{% endblock %}
+
+    {% set code = code(_self) %}
