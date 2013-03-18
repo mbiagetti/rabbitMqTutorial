@@ -35,6 +35,9 @@ La console è raggiungibile all'url:
 
 [http://localhost:15672/#/](http://localhost:15672/#/)
 
+In ogni branch puoi verificare le funzionalità esposte dalla homepage:
+
+[http://rabbitmq-tutorial.localhost/app_dev.php](http://rabbitmq-tutorial.localhost/app_dev.php)
 
 2) Branch queue
 -------------------------------------
