@@ -5,18 +5,13 @@
 {% block content_header '' %}
 
 {% block content %}
-    <h1>Topic Examples</h1>
+    <h1>STDIN Producer</h1>
 
     <div class="block-community">
-        <ul><b>1. Topic <a href="http://www.rabbitmq.com/tutorials/tutorial-five-java.html" target="_blank">scenario 5</a></b></ul>
-        <ul><a href="http://www.rabbitmq.com/tutorials/tutorial-five-java.html" target="_blank"><img width="180" src="http://www.rabbitmq.com//img/tutorials/python-five.png"></a></ul>
-        <ul>attiva consumer su tutti i messaggi del topic da shell</ul>
-        <ul><i>> php app/console rabbitmq:anon-consumer -m 10 logs_watcher</i></ul>
-        <ul>attiva consumer dei soli messaggi error del topic da shell</ul>
-        <ul><i>> php app/console rabbitmq:anon-consumer  -m 10 -r '#.error' logs_watcher</i></ul>
-        <ul>Invia messaggio di info, consumato solo dal generico consumer</ul>
-        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/log/message.info/registration.ok/1" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/log/message.info/registration.ok/1</a></ul>
-        <ul>Invia messaggio di error, consumato da entrambi i consumer</ul>
-        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/log/message.error/registration.ko/1" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/log/message.error/registration.ko/1</a></ul>
+        <ul><b>STDIN Producer (Bundle's tool)</b></ul>
+        <ul>attiva consumer da shell</ul>
+        <ul><i>> php app/console rabbitmq:consumer stdin_message</i></ul>
+        <ul>attiva producer da shell che invia il contenuto di un files</ul>
+        <ul><i>> php app/console rabbitmq:stdin-producer words < message.txt</i></ul>
     </div>
 {% endblock %}

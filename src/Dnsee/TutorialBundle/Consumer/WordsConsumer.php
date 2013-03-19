@@ -6,16 +6,14 @@ use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 
 
-class LoggerWatcher implements ConsumerInterface
+class WordsConsumer implements ConsumerInterface
 {
-    protected $i = 0;
-
     public function execute(AMQPMessage $msg)
     {
+
         $message = unserialize($msg->body);
 
-        echo '['.++$this->i.']'.$message['message'];
-        echo PHP_EOL;
+        echo $message;
 
         return true;
     }

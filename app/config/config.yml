@@ -71,17 +71,17 @@ old_sound_rabbit_mq:
             vhost:     '/'
 
     producers:
-        app_logs:
-            connection: default
-            exchange_options: {name: 'app-logs', type: topic}
+        words:
+          connection: default
+          exchange_options: {name: 'words', type: direct}
 
     consumers:
-    anon_consumers:
-        logs_watcher:
+        stdin_message:
             connection: default
-            exchange_options: {name: 'app-logs', type: topic}
-            callback:         logs_watcher
+            exchange_options: {name: 'words', type: direct}
+            queue_options:    {name: 'words'}
+            callback:         words_message_service
 
 services:
-    logs_watcher:
-        class: Dnsee\TutorialBundle\Consumer\LoggerWatcher
+    words_message_service:
+        class: Dnsee\TutorialBundle\Consumer\WordsConsumer
