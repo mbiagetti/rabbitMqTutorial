@@ -10,32 +10,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class QueueController extends Controller
 {
     /**
-     * @Route("/simpleRpc")
+     * @Route("/log/{severity}/{message}/{tot}", defaults={"tot" = 1})
      * @Template()
      */
-    public function simpleRpcAction()
+    public function logAction($severity,$message,$tot)
     {
-        $client = $this->get('old_sound_rabbit_mq.integer_store_rpc');
-        $client->addRequest(serialize(array('min' => 0, 'max' => 10)), 'random_int', 'request_id');
-        $replies = $client->getReplies();
+        $msg = array( 'message' => $message);
+        for($i=0;$i<$tot;$i++)
+            $this->get('old_sound_rabbit_mq.app_logs_producer')->publish(serialize($msg),$severity);
 
-        return array('replies' => $replies);
-    }
-
-    /**
-     * @Route("/parallelRpc")
-     * @Template()
-     */
-    public function parallelRpcAction()
-    {
-        $start = microtime(true);
-        $client = $this->get('old_sound_rabbit_mq.parallel_rpc');
-        $client->addRequest(serialize(array('delay' => 3)), 'service_a', 'service_a_response');
-        $client->addRequest(serialize(array('delay' => 4)), 'service_b', 'service_b_response');
-        $replies = $client->getReplies();
-        $end= microtime(true);
-
-        return array('replies' => $replies, 'elapsed'=> $end-$start);
+        return array('severity' => $severity, 'message' => $message,'tot'=>$tot);
     }
 
 }

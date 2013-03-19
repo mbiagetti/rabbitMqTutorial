@@ -5,26 +5,18 @@
 {% block content_header '' %}
 
 {% block content %}
-    {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
-
-    <h1>RPC Examples</h1>
+    <h1>Topic Examples</h1>
 
     <div class="block-community">
-        <ul><b>1. Simple RPC (Request/reply) <a href="http://www.rabbitmq.com/tutorials/tutorial-six-java.html" target="_blank">scenario 6</a></b></ul>
-        <ul><a href="http://www.rabbitmq.com/tutorials/tutorial-six-java.html" target="_blank"><img width="180" src="http://www.rabbitmq.com//img/tutorials/python-six.png"></a></ul>
-        <ul>attiva server rpc da shell</ul>
-        <ul><i>> php app/console rabbitmq:rpc-server random_int</i></ul>
-        <ul>attiva la request</ul>
-        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/simpleRpc" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/simpleRpc</a></ul>
-        <ul><br></ul>
-        <ul><b>2. Parallel RPC</b></ul>
-        <ul>attiva server RPC da shell, service A</ul>
-        <ul><i>> php app/console rabbitmq:rpc-server service_a</i></ul>
-        <ul>attiva server RPC da shell, service B</ul>
-        <ul><i>> php app/console rabbitmq:rpc-server service_b</i></ul>
-        <ul>attiva la request</ul>
-        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/parallelRpc" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/parallelRpc</a></ul>
-
-
+        <ul><b>1. Topic <a href="http://www.rabbitmq.com/tutorials/tutorial-five-java.html" target="_blank">scenario 5</a></b></ul>
+        <ul><a href="http://www.rabbitmq.com/tutorials/tutorial-five-java.html" target="_blank"><img width="180" src="http://www.rabbitmq.com//img/tutorials/python-five.png"></a></ul>
+        <ul>attiva consumer su tutti i messaggi del topic da shell</ul>
+        <ul><i>> php app/console rabbitmq:anon-consumer -m 10 logs_watcher</i></ul>
+        <ul>attiva consumer dei soli messaggi error del topic da shell</ul>
+        <ul><i>> php app/console rabbitmq:anon-consumer  -m 10 -r '#.error' logs_watcher</i></ul>
+        <ul>Invia messaggio di info, consumato solo dal generico consumer</ul>
+        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/log/message.info/registration.ok/1" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/log/message.info/registration.ok/1</a></ul>
+        <ul>Invia messaggio di error, consumato da entrambi i consumer</ul>
+        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/log/message.error/registration.ko/1" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/log/message.error/registration.ko/1</a></ul>
     </div>
 {% endblock %}
