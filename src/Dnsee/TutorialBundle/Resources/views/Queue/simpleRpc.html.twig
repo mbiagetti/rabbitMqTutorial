@@ -1,0 +1,10 @@
+{% extends 'DnseeTutorialBundle::layout.html.twig' %}
+
+{% block title "RPC example"  %}
+    {% block content %}
+        Done!
+        Random number is:
+        {{replies.request_id.value}}
+{% endblock %}
+
+    {% set code = code(_self) %}

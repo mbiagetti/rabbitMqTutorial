@@ -10,28 +10,32 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class QueueController extends Controller
 {
     /**
-     * @Route("/produce/{subject}/{message}/{tot}", defaults={"tot" = 1})
+     * @Route("/simpleRpc")
      * @Template()
      */
-    public function produceAction($subject,$message,$tot)
+    public function simpleRpcAction()
     {
-        $msg=new Message();
-        $msg->setBody($message);
-        $msg->setSubject($subject);
+        $client = $this->get('old_sound_rabbit_mq.integer_store_rpc');
+        $client->addRequest(serialize(array('min' => 0, 'max' => 10)), 'random_int', 'request_id');
+        $replies = $client->getReplies();
 
-        /**
-         *  Puoi inviare messaggi di tipo XML, Json o text plain semplicemente modificando il content type
-         * della coda, insomma qualsiasi formato che sia serializzabile, ovviamente anche oggetti.
-         *
-            $this->get('old_sound_rabbit_mq.custom_message_producer')->setContentType('application/json');
+        return array('replies' => $replies);
+    }
 
-         * il default è text/plain
-         */
+    /**
+     * @Route("/parallelRpc")
+     * @Template()
+     */
+    public function parallelRpcAction()
+    {
+        $start = microtime(true);
+        $client = $this->get('old_sound_rabbit_mq.parallel_rpc');
+        $client->addRequest(serialize(array('delay' => 3)), 'service_a', 'service_a_response');
+        $client->addRequest(serialize(array('delay' => 4)), 'service_b', 'service_b_response');
+        $replies = $client->getReplies();
+        $end= microtime(true);
 
-        for($i=0;$i<$tot;$i++)
-            $this->get('old_sound_rabbit_mq.custom_message_producer')->publish(serialize($msg));
-
-        return array('msg' => $msg, 'tot'=>$tot);
+        return array('replies' => $replies, 'elapsed'=> $end-$start);
     }
 
 }
