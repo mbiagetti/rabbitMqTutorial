@@ -7,14 +7,9 @@
 {% block content %}
     {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
 
-    <h1>Welcome!</h1>
-
-    <p>Queue example</p>
+    <h1>RPC Examples</h1>
 
     <div class="block-community">
-        <ul>start RabbitMQ server</ul>
-        <ul><i>>sudo service rabbitmq-server start</i></ul>
-        <ul><br></ul>
         <ul><b>1. Simple RPC (Request/reply) <a href="http://www.rabbitmq.com/tutorials/tutorial-six-java.html" target="_blank">scenario 6</a></b></ul>
         <ul><a href="http://www.rabbitmq.com/tutorials/tutorial-six-java.html" target="_blank"><img width="180" src="http://www.rabbitmq.com//img/tutorials/python-six.png"></a></ul>
         <ul>attiva server rpc da shell</ul>
