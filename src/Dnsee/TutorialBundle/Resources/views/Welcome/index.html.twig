@@ -5,29 +5,26 @@
 {% block content_header '' %}
 
 {% block content %}
-    {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
 
-    <h1>Welcome!</h1>
+    {% set my_url_one_message = url('_produce', { 'subject': 'ciao',message:'mondo' }) %}
+    {% set my_url_two_message = url('_produce', { 'subject': 'ciao','message':'mondo', 'tot':'2' }) %}
 
-    <p>Queue example</p>
+    <h1>Simple Queue examples</h1>
 
     <div class="block-community">
-        <ul>start RabbitMQ server</ul>
-        <ul><i>>sudo service rabbitmq-server start</i></ul>
-        <ul><br></ul>
         <ul><b>1. un producer, un consumer <a href="http://www.rabbitmq.com/tutorials/tutorial-one-java.html" target="_blank">scenario 1</a></b></ul>
         <ul><a href="http://www.rabbitmq.com/tutorials/tutorial-one-java.html" target="_blank"><img width="180" src="http://www.rabbitmq.com//img/tutorials/python-one.png"></a></ul>
         <ul>attiva consumer da shell</ul>
         <ul><i>>php app/console rabbitmq:consumer custom_message</i></ul>
         <ul>attiva il producer</ul>
-        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/produce/ciao/mondo" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/produce/ciao/mondo</a></ul>
+        <ul><a href="{{ my_url_one_message }}" target="_blank">{{ my_url_one_message }}</a></ul>
         <ul><br></ul>
         <ul><b>1. un producer, due consumer <a href="http://www.rabbitmq.com/tutorials/tutorial-two-java.html" target="_blank">scenario 2</a></b></ul>
         <ul><a href="http://www.rabbitmq.com/tutorials/tutorial-two-java.html" target="_blank"><img width="180" src="http://www.rabbitmq.com//img/tutorials/python-two.png"></a></ul>
         <ul>attiva altro consumer con un'altra shell</ul>
         <ul><i>>php app/console rabbitmq:consumer custom_message</i></ul>
         <ul>attiva il producer per inviare due messaggi</ul>
-        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/produce/ciao/mondo/2" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/produce/ciao/mondo/2</a></ul>
+        <ul><a href="{{ my_url_two_message }}" target="_blank">{{ my_url_two_message }}</a></ul>
         <ul><br></ul>
         <ul><b>3. Publish/Subscribe <a href="http://www.rabbitmq.com/tutorials/tutorial-three-java.html" target="_blank">scenario 3</a></b></ul>
         <ul><a href="http://www.rabbitmq.com/tutorials/tutorial-three-java.html" target="_blank"><img width="180" src="http://www.rabbitmq.com//img/tutorials/python-three.png"></a></ul>
@@ -35,7 +32,7 @@
         <ul><i>>php app/console rabbitmq:consumer custom_message</i></ul>
         <ul><i>>php app/console rabbitmq:consumer another_custom_message</i></ul>
         <ul>attiva il producer per inviare un solo messaggio</ul>
-        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/produce/ciao/mondo" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/produce/ciao/mondo</a></ul>
+        <ul><a href="{{ my_url_one_message }}" target="_blank">{{ my_url_one_message }}</a></ul>
 
 
     </div>

@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class QueueController extends Controller
 {
     /**
-     * @Route("/produce/{subject}/{message}/{tot}", defaults={"tot" = 1})
+     * @Route("/produce/{subject}/{message}/{tot}", name="_produce", defaults={"tot" = 1})
      * @Template()
      */
     public function produceAction($subject,$message,$tot)
