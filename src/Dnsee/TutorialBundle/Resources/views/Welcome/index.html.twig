@@ -5,16 +5,14 @@
 {% block content_header '' %}
 
 {% block content %}
-    {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
+    <h1>Queue with routing key example</h1>
 
-    <h1>Welcome!</h1>
+    {% set my_url_sms  = url('_key', { 'subject': 'ciao','message':'mondo','key':'delivery.sms' }) %}
+    {% set my_url_mail = url('_key', { 'subject': 'ciao','message':'mondo','key':'delivery.mail' }) %}
 
-    <p>Queue with routing key example</p>
+
 
     <div class="block-community">
-        <ul>start RabbitMQ server</ul>
-        <ul><i>>sudo service rabbitmq-server start</i></ul>
-        <ul><br></ul>
         <ul><b>1. un producer con  consumer selettivi <a href="http://www.rabbitmq.com/tutorials/tutorial-four-java.html" target="_blank">scenario 4</a></b></ul>
         <ul><a href="http://www.rabbitmq.com/tutorials/tutorial-four-java.html" target="_blank"><img width="180" src="http://www.rabbitmq.com//img/tutorials/python-four.png"></a></ul>
         <ul>attiva consumer per messaggi di tipo sms da shell</ul>
@@ -22,9 +20,9 @@
         <ul>attiva consumer per messaggi di tipo mail da shell</ul>
         <ul><i>>php app/console rabbitmq:consumer rk_mail_custom_message</i></ul>
         <ul>attiva il producer con routing key mail</ul>
-        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/rouningKey/ciao/mondo/delivery.mail" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/rouningKey/ciao/mondo/delivery.mail</a></ul>
+        <ul><a href="{{ my_url_mail }}" target="_blank">{{ my_url_mail }}</a></ul>
         <ul>attiva il producer con routing key mail</ul>
-        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/rouningKey/ciao/mondo/delivery.sms" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/rouningKey/ciao/mondo/delivery.sms</a></ul>
+        <ul><a href="{{ my_url_sms }}" target="_blank">{{ my_url_sms }}</a></ul>
         <ul>puoi specificare il routing key come parametro al consumer da command line</ul>
         <ul><i>>php app/console rabbitmq:consumer --route "delivery.sms" rk_custom_message</i></ul>
 
