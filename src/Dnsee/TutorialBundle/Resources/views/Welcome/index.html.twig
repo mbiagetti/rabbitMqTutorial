@@ -5,7 +5,8 @@
 {% block content_header '' %}
 
 {% block content %}
-    {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
+    {% set simple_rpc = url('_simpleRpc') %}
+    {% set parallel_rpc = url('_parallelRpc') %}
 
     <h1>RPC Examples</h1>
 
@@ -15,7 +16,7 @@
         <ul>attiva server rpc da shell</ul>
         <ul><i>> php app/console rabbitmq:rpc-server random_int</i></ul>
         <ul>attiva la request</ul>
-        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/simpleRpc" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/simpleRpc</a></ul>
+        <ul><a href="{{ simple_rpc }}" target="_blank">{{ simple_rpc }}</a></ul>
         <ul><br></ul>
         <ul><b>2. Parallel RPC</b></ul>
         <ul>attiva server RPC da shell, service A</ul>
@@ -23,7 +24,7 @@
         <ul>attiva server RPC da shell, service B</ul>
         <ul><i>> php app/console rabbitmq:rpc-server service_b</i></ul>
         <ul>attiva la request</ul>
-        <ul><a href="http://rabbitmq-tutorial.localhost/app_dev.php/parallelRpc" target="_blank">http://rabbitmq-tutorial.localhost/app_dev.php/parallelRpc</a></ul>
+        <ul><a href="{{ parallel_rpc }}" target="_blank">{{ parallel_rpc }}</a></ul>
 
 
     </div>

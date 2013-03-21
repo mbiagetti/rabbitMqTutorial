@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class QueueController extends Controller
 {
     /**
-     * @Route("/simpleRpc")
+     * @Route("/simpleRpc", name="_simpleRpc")
      * @Template()
      */
     public function simpleRpcAction()
@@ -23,7 +23,7 @@ class QueueController extends Controller
     }
 
     /**
-     * @Route("/parallelRpc")
+     * @Route("/parallelRpc", name="_parallelRpc")
      * @Template()
      */
     public function parallelRpcAction()
