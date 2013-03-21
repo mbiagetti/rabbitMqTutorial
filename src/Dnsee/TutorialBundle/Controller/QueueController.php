@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class QueueController extends Controller
 {
     /**
-     * @Route("/log/{severity}/{message}/{tot}", defaults={"tot" = 1})
+     * @Route("/log/{severity}/{message}/{tot}", name="_log", defaults={"tot" = 1})
      * @Template()
      */
     public function logAction($severity,$message,$tot)
